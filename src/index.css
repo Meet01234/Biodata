@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 30% 95%;
+    --foreground: 25 25% 15%;
+    --card: 35 30% 97%;
+    --card-foreground: 25 25% 15%;
+    --popover: 35 30% 97%;
+    --popover-foreground: 25 25% 15%;
+    --primary: 37 50% 53%;
+    --primary-foreground: 35 30% 97%;
+    --secondary: 30 60% 50%;
+    --secondary-foreground: 35 30% 97%;
+    --muted: 35 20% 90%;
+    --muted-foreground: 25 15% 45%;
+    --accent: 15 75% 28%;
+    --accent-foreground: 35 30% 97%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 37 40% 75%;
+    --input: 37 40% 75%;
+    --ring: 37 50% 53%;
+    --radius: 1.5rem;
+
+    --gold: 37 50% 53%;
+    --saffron: 30 90% 50%;
+    --cream: 35 40% 96%;
+    --deep-brown: 25 25% 15%;
+    --sienna: 15 75% 28%;
+    --glass-bg: 35 30% 100% / 0.28;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 25 20% 6%;
+    --foreground: 35 30% 92%;
+    --card: 25 20% 9%;
+    --card-foreground: 35 30% 92%;
+    --popover: 25 20% 9%;
+    --popover-foreground: 35 30% 92%;
+    --primary: 37 55% 55%;
+    --primary-foreground: 25 20% 6%;
+    --secondary: 30 65% 52%;
+    --secondary-foreground: 25 20% 6%;
+    --muted: 25 15% 15%;
+    --muted-foreground: 35 20% 65%;
+    --accent: 15 65% 40%;
+    --accent-foreground: 35 30% 95%;
+    --border: 37 30% 25%;
+    --input: 37 30% 25%;
+    --ring: 37 55% 55%;
+
+    --gold: 37 55% 55%;
+    --saffron: 30 85% 52%;
+    --cream: 25 20% 12%;
+    --deep-brown: 35 30% 92%;
+    --sienna: 15 65% 40%;
+    --glass-bg: 25 20% 6% / 0.35;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply rounded-3xl border border-primary/20;
+    background: hsla(var(--glass-bg));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 8px 32px hsla(var(--gold) / 0.12), inset 0 1px 0 hsla(var(--gold) / 0.15);
+  }
+
+  /* Nav pill: small rounded glassmorphism background for each nav item */
+  .nav-pill {
+    background: hsla(var(--background) / 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsla(var(--gold) / 0.1);
+    transition: all 0.3s ease;
+  }
+  .nav-pill:hover {
+    background: hsla(var(--primary) / 0.12);
+    border-color: hsla(var(--gold) / 0.25);
+  }
+  .dark .nav-pill {
+    background: hsla(0 0% 100% / 0.08);
+    border-color: hsla(0 0% 100% / 0.1);
+  }
+  .dark .nav-pill:hover {
+    background: hsla(0 0% 100% / 0.15);
+    border-color: hsla(var(--gold) / 0.3);
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 30px hsla(var(--gold) / 0.3), 0 0 60px hsla(var(--saffron) / 0.1);
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--saffron)), hsl(var(--gold)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.4;
+    padding-top: 0.1em;
+    padding-bottom: 0.05em;
+  }
+
+  .font-display {
+    font-family: 'Cinzel', serif;
+  }
+
+  .font-body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .section-divider {
+    @apply w-24 h-0.5 mx-auto;
+    background: linear-gradient(90deg, transparent, hsl(var(--gold)), transparent);
+  }
+
+  /* Text backdrop for readability over video */
+  .text-backdrop {
+    /* Light mode: use a dark fade instead of whitish shadow */
+    text-shadow: 0 2px 7px hsla(var(--deep-brown) / 0.28), 0 0 12px hsla(var(--deep-brown) / 0.14);
+  }
+
+  /* In dark mode, keep the shadow less muddy and slightly more gold-tinted */
+  .dark .text-backdrop {
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.65), 0 0 14px hsla(var(--gold) / 0.14);
+  }
+
+  /* Tighter shadow to prevent blur bleeding into the top of gradient text */
+  .text-backdrop-tight {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+
+  .dark .text-backdrop-tight {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 10px hsla(var(--gold) / 0.12);
+  }
+}
+
+/* Smooth scrolling with offset for fixed header */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--gold));
+  border-radius: 3px;
+}
